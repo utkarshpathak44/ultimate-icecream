@@ -30,7 +30,7 @@ export const IceCreamProvider = ({ children }: { children: ReactNode }) => {
 export const useIceCreams = () => {
   const context = useContext(IceCreamContext);
   if (!context) {
-    throw new Error("useCounter must be used within a CounterProvider");
+    throw new Error("");
   }
   return context;
 };

@@ -10,7 +10,6 @@ interface IceCream {
   stock: number;
   about: string;
 }
-
 const iceCreamData: IceCream[] = [
   {
     id: 1,
