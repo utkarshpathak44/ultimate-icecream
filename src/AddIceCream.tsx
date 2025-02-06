@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useReducer } from "react";
 
 const initialData = {
   name: "",
@@ -7,7 +7,7 @@ const initialData = {
   description: "",
 };
 
-const iceCreamReducer = (state: typeof initialData, action: any) => {
+const iceCreamReducer = (state: typeof initialData, action:any) => {
   switch (action.type) {
     case "name":
       return { ...state, name: action.payload };
@@ -23,35 +23,35 @@ const iceCreamReducer = (state: typeof initialData, action: any) => {
 };
 
 const AddIceCream = () => {
-  const handleSubmit = (e: any) => {
+  const [iceCream, dispatchIceCream] = useReducer(iceCreamReducer, initialData);
+
+  const handleChange = (e:any) => {
+    dispatchIceCream({ type: e.target.name, payload: e.target.value });
+  };
+
+  const handleSubmit = (e:any) => {
     e.preventDefault();
+    console.log("Submitted Data:", iceCream);
   };
 
   return (
     <div className="flex w-full flex-col md:flex-row">
       <div>this is where the image will be displayed</div>
       <div className="w-full">
-        <form action="">
-          <label htmlFor="">enter the ice cream name</label>
-          <input type="text" className="custom-input" />
+        <form onSubmit={handleSubmit}>
+          <label>Enter the ice cream name</label>
+          <input type="text" name="name" className="custom-input" value={iceCream.name} onChange={handleChange} />
           <br />
-          <label htmlFor="">enter the price of the ice cream</label>
-          <input type="text" name="" id="" className="custom-input" />
+          <label>Enter the price of the ice cream</label>
+          <input type="number" name="price" className="custom-input" value={iceCream.price} onChange={handleChange} />
           <br />
-          <label htmlFor="">enter the amount of the stock</label>
-          <input type="text" name="" id="" className="custom-input" />
+          <label>Enter the amount of the stock</label>
+          <input type="number" name="stock" className="custom-input" value={iceCream.stock} onChange={handleChange} />
           <br />
-          <label htmlFor="">Enter the description of the ice cream</label>
-          <input type="text" name="" id="" className="custom-input" />
+          <label>Enter the description of the ice cream</label>
+          <input type="text" name="description" className="custom-input" value={iceCream.description} onChange={handleChange} />
           <br />
-
-          <input
-            type="submit"
-            name=""
-            id=""
-            className="custom-button"
-            onClick={handleSubmit}
-          />
+          <input type="submit" className="custom-button" value="Add Ice Cream" />
         </form>
       </div>
     </div>
