@@ -1,0 +1,6 @@
+useState: for stateful variables, re-renders the components when the value of the stateful variable is changed
+useEffect: for performing some logic when some dependency is changed, on the first render or on all the renders
+useRef: for persisting the value throught the re renders of the component, for pointing towards the dom element, for storing the previous state variable
+useMemo: memoizes the return value of the function, on the basis of the dependencies, this saves the computation power, this calls the function and returns the value
+useCallback: for memoizing the function so that it isnt re-calculated, on the basis of the dependency array, the functions arnt called they are just returned
+useReducer: for handling the complex state of the stateful components, requires a reducer function, an initial state, the reducer function handles the changes in the complex state
