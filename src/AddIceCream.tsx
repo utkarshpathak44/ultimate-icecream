@@ -1,28 +1,26 @@
 import { useState } from "react";
 
-const initialData={
-    name:"",
-    price:0,
-    stock:0,
-    description:""
-}
+const initialData = {
+  name: "",
+  price: 0,
+  stock: 0,
+  description: "",
+};
 
-const iceCreamReducer=(state:typeof initialData, action:any)=>{
-    switch(action.type){
-        case "name":
-            return {...state, name:action.payload}
-        case "price":
-            return {...state, price:action.payload}
-        case "stock":
-            return {...state, stock:action.payload}
-        case "description":
-            return {...state, description:action.payload}
-        default:
+const iceCreamReducer = (state: typeof initialData, action: any) => {
+  switch (action.type) {
+    case "name":
+      return { ...state, name: action.payload };
+    case "price":
+      return { ...state, price: action.payload };
+    case "stock":
+      return { ...state, stock: action.payload };
+    case "description":
+      return { ...state, description: action.payload };
+    default:
       throw new Error("Unknown action type");
-
-    }
-
-}
+  }
+};
 
 const AddIceCream = () => {
   const handleSubmit = (e: any) => {
