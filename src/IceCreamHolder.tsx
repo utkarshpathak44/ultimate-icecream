@@ -1,6 +1,7 @@
 import React from "react";
 
 interface IceCreamHolderProps {
+  id:number;
   image: string;
   name: string;
   price: number;
@@ -14,9 +15,10 @@ const IceCreamHolder: React.FC<IceCreamHolderProps> = ({
   price,
   stock,
   about,
+  id,
 }) => {
   return (
-    <div className="bg-stone-100 w-full h-full flex flex-col p-0 pb-3 rounded-xl shadow-md overflow-hidden">
+    <div key={id.toString()} className="bg-stone-100 w-full h-full flex flex-col p-0 pb-3 rounded-xl shadow-md overflow-hidden">
       <div className="flex justify-center items-center border-stone-500 border">
         <img
           src={image}

@@ -1,4 +1,11 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useEffect,
+} from "react";
+import axios from "axios";
 
 interface IceCream {
   id: number;
@@ -14,11 +21,23 @@ interface IceCreamContextType {
   setList: any;
 }
 
-const IceCreamContext = createContext<IceCreamContextType | undefined>(undefined);
+const IceCreamContext = createContext<IceCreamContextType | undefined>(
+  undefined
+);
 
 // Provider component
 export const IceCreamProvider = ({ children }: { children: ReactNode }) => {
-  const [iceCreamList, setList] = useState([]);
+const [iceCreamList, setList] = useState<IceCream[]>([]);
+
+useEffect(() => {
+    axios.get<IceCream[]>("http://localhost:5000/api/records")
+      .then((response) => {
+        setList(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching ice cream records:", error);
+      });
+  }, []);
 
   return (
     <IceCreamContext.Provider value={{ iceCreamList, setList }}>
