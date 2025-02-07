@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   createContext,
   useContext,
@@ -5,7 +6,6 @@ import {
   ReactNode,
   useEffect,
 } from "react";
-import axios from "axios";
 
 interface IceCream {
   id: number;
@@ -19,18 +19,45 @@ interface IceCream {
 interface IceCreamContextType {
   iceCreamList: IceCream[];
   setList: any;
+  sendIceCream:any;
 }
 
 const IceCreamContext = createContext<IceCreamContextType | undefined>(
   undefined
 );
 
+
+
+async function sendIceCream(iceCream: IceCream): Promise<any> {
+  try {
+    const response = await axios.post(
+      "http://localhost:5000/api/records",
+      iceCream,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error sending ice cream:", error);
+    throw error;
+  }
+}
+
+
 // Provider component
 export const IceCreamProvider = ({ children }: { children: ReactNode }) => {
-const [iceCreamList, setList] = useState<IceCream[]>([]);
+  const [iceCreamList, setList] = useState<IceCream[]>([]);
 
-useEffect(() => {
-    axios.get<IceCream[]>("http://localhost:5000/api/records")
+
+
+
+  useEffect(() => {
+    axios
+      .get<IceCream[]>("http://localhost:5000/api/records")
       .then((response) => {
         setList(response.data);
       })
@@ -40,7 +67,7 @@ useEffect(() => {
   }, []);
 
   return (
-    <IceCreamContext.Provider value={{ iceCreamList, setList }}>
+    <IceCreamContext.Provider value={{ iceCreamList, setList, sendIceCream }}>
       {children}
     </IceCreamContext.Provider>
   );

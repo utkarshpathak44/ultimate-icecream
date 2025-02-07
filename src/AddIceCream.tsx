@@ -32,6 +32,7 @@ const AddIceCream = () => {
   const handleSubmit = (e:any) => {
     e.preventDefault();
     console.log("Submitted Data:", iceCream);
+    //send the ice cream to the server to be added in the list and get(refresh) all the ice creams in the context
   };
 
   return (
