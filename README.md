@@ -1,50 +1,17 @@
-# React + TypeScript + Vite
+# Ultimate Icecream
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Ultimate Icecream is a web application that allows users to explore a variety of ice cream flavors, discover detailed recipes, and enjoy a user-friendly interface for all their ice cream cravings.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Explore Flavors**: Discover a wide range of ice cream flavors.
+- **Detailed Recipes**: Access easy-to-follow recipes for each flavor.
+- **User-Friendly Interface**: Enjoy a smooth and intuitive design.
+- **Responsive Design**: Experience seamless performance across all devices.
 
-## Expanding the ESLint configuration
+## Demo
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+Check out the live application: [Ultimate Icecream Demo](#)
 ```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+   git clone https://github.com/utkarshpathak44/ultimate-icecream.git
+   cd ultimate-icecream
