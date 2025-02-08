@@ -25,11 +25,11 @@ const iceCreamReducer = (state: typeof initialData, action:any) => {
 const AddIceCream = () => {
   const [iceCream, dispatchIceCream] = useReducer(iceCreamReducer, initialData);
 
-  const handleChange = (e:any) => {
+  const handleChange = (e:HTMLFormElement) => {
     dispatchIceCream({ type: e.target.name, payload: e.target.value });
   };
 
-  const handleSubmit = (e:any) => {
+  const handleSubmit = (e:HTMLFormElement) => {
     e.preventDefault();
     console.log("Submitted Data:", iceCream);
     //send the ice cream to the server to be added in the list and get(refresh) all the ice creams in the context

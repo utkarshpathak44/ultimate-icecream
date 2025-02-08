@@ -1,6 +1,10 @@
+import Counter from './test/Counter.tsx'
+import StopWatch from './test/StopWatch.tsx';
+
 const About=()=>{
     return (
-        <div>this is the about page</div>
+        // <Counter/>
+        <StopWatch/>
     )
 }
 
