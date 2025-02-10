@@ -94,7 +94,7 @@ const iceCreamData = [
 ];
 
 app.get("/api/records", (req, res) => {
-  res.send(iceCreamData);
+  setTimeout(() => res.send(iceCreamData), 2000);
 });
 
 app.get("/api.records/:id", (req, res) => {
@@ -102,6 +102,7 @@ app.get("/api.records/:id", (req, res) => {
     (record) => record.id === parseInt(params.id)
   );
   if (!iceCream) return res.status(404).send({ message: "Record not found" });
+
   res.send(iceCream);
 });
 
@@ -109,7 +110,8 @@ app.post("/api/records", (req, res) => {
   const newRecord = req.body;
   newRecord.id = iceCreamData.length + 1;
   iceCreamData.push(newRecord);
-  res.status(201)
+  console.log("received a new ice cream type");
+  res.status(201);
 });
 
 app.delete("/api/records/:id", (req, res) => {
@@ -123,5 +125,11 @@ app.delete("/api/records/:id", (req, res) => {
   res.status(204).send();
 });
 
+app.patch("/api/records/:id", (req, res) => {
+  const { id } = req.params;
+  const newData = req.body;
+  const index = iceCreamData.findIndex((record) => record.id === id);
+  iceCreamData[index] = newData;
+});
 
 app.listen(port, () => console.log(`Server is listening on port ${port}`));

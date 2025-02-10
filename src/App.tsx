@@ -5,6 +5,9 @@ import About from "./About";
 import { IceCreamProvider } from "./IceCreamContext";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+// import { useSearchParams } from 'react-router-dom';
+import SearchIceCreams from "./SearchIceCreams";
+import { ParticularIceCream } from "./ParticularIceCream";
 
 const pageTitles: Record<string, string> = {
   "/": "Home",
@@ -12,7 +15,7 @@ const pageTitles: Record<string, string> = {
   "/contact": "Contact",
 };
 
-const pageTitleUpdater=()=>{
+const pageTitleUpdater = () => {
   const location = useLocation();
 
   useEffect(() => {
@@ -20,13 +23,12 @@ const pageTitleUpdater=()=>{
   }, [location]);
 
   return null;
-}
+};
 
 function App() {
-  
   return (
     <BrowserRouter>
-      <div className="bg-pink-500 h-screen px-5 sm:px-20 md:px-90 overflow-scroll">
+      <div className="bg-stone-500 h-screen px-5 md:px-0 overflow-scroll">
         <NavBar />
         <Routes>
           <Route
@@ -38,8 +40,9 @@ function App() {
             }
           />
           <Route path="/about" element={<About />} />
-                    {/* <Route path="/contact" element={<Contact />} /> */}
-
+          <Route path="/search" element={<SearchIceCreams />} />
+          <Route path="/ice-cream/:id" element={<ParticularIceCream />} />
+          {/* <Route path="/contact" element={<Contact />} /> */}
         </Routes>
       </div>
     </BrowserRouter>

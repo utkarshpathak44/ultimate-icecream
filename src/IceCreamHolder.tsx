@@ -18,16 +18,16 @@ const IceCreamHolder: React.FC<IceCreamHolderProps> = ({
   id,
 }) => {
   return (
-    <div key={id.toString()} className="bg-stone-100 w-full h-full flex flex-col p-0 pb-3 rounded-xl shadow-md overflow-hidden">
-      <div className="flex justify-center items-center border-stone-500 border">
+    <div key={id.toString()} className="bg-stone-400 w-full h-full flex flex-col p-5 pb-3 rounded-xl shadow-md overflow-hidden">
+      <div className="flex justify-center items-center border-stone-500 border rounded-xl">
         <img
           src={image}
           alt={name}
-          className="w-64 h-64 object-cover rounded-md"
+          className="w-full h-64 object-cover object-center rounded-xl"
         />
       </div>
-      <div className="text-lg font-bold mt-2 px-2">{name}</div>
-      <div className="flex items-center mt-1 gap-2 px-2">
+      <div className="text-lg font-bold mt-2">{name}</div>
+      <div className="flex items-center mt-1 gap-2">
         <div className="text-stone-600 font-semibold">${price}</div>
         <div className={stock ? "text-stone-600" : "text-red-400"} >
           {stock ? `${stock} in stock` : "Currently out of stock"}

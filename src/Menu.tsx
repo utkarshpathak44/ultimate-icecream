@@ -6,7 +6,6 @@ import IceCreamGrid from "./IceCreamGrid";
 import AddIceCream from "./AddIceCream";
 
 const Menu = () => {
-  const { setList } = useIceCreams();
   const [addMenu, showAppMenu] = useState(false);
   const HandleGridClick=()=>{
     if(addMenu){

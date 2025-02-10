@@ -31,18 +31,18 @@ const StopWatch = () => {
   return (
     <div className=" flex p-10">
       <div className="flex flex-row  gap-3">
-        <div className="text-7xl">{time}</div>
+        <div className="text-7xl font-bold text-white">{time}</div>
         <button
           type="button"
           onClick={handleStartStop}
-          className="bg-stone-800 p-5"
+          className="bg-stone-800 p-5  rounded-2xl text-white text-2xl"
         >
           {isRunning ? "Stop" : "Start"}
         </button>
         <button
           type="button"
           onClick={handleReset}
-          className="bg-stone-800 p-5"
+          className="bg-stone-800 p-5  rounded-2xl text-white text-2xl"
         >
           reset
         </button>

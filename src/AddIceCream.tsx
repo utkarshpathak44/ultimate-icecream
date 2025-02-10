@@ -1,4 +1,6 @@
 import { useReducer } from "react";
+import { useIceCreams } from "./IceCreamContext";
+
 
 const initialData = {
   name: "",
@@ -7,7 +9,7 @@ const initialData = {
   description: "",
 };
 
-const iceCreamReducer = (state: typeof initialData, action:any) => {
+const iceCreamReducer = (state: typeof initialData, action: { type: any; payload: any; }) => {
   switch (action.type) {
     case "name":
       return { ...state, name: action.payload };
@@ -24,15 +26,17 @@ const iceCreamReducer = (state: typeof initialData, action:any) => {
 
 const AddIceCream = () => {
   const [iceCream, dispatchIceCream] = useReducer(iceCreamReducer, initialData);
+  const { sendIceCream } = useIceCreams();
 
-  const handleChange = (e:HTMLFormElement) => {
+
+  const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
     dispatchIceCream({ type: e.target.name, payload: e.target.value });
   };
 
-  const handleSubmit = (e:HTMLFormElement) => {
+  const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Submitted Data:", iceCream);
-    //send the ice cream to the server to be added in the list and get(refresh) all the ice creams in the context
+    sendIceCream(iceCream)
   };
 
   return (

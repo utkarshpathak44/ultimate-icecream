@@ -1,4 +1,6 @@
 import axios from "axios";
+import { IceCream } from "./types/types";
+
 import {
   createContext,
   useContext,
@@ -7,56 +9,42 @@ import {
   useEffect,
 } from "react";
 
-interface IceCream {
-  id: number;
-  image: string;
-  name: string;
-  price: number;
-  stock: number;
-  about: string;
-}
-
 interface IceCreamContextType {
   iceCreamList: IceCream[];
-  setList: any;
-  sendIceCream:any;
+  fetchIceCreams: any;
+  sendIceCream: any;
 }
 
 const IceCreamContext = createContext<IceCreamContextType | undefined>(
   undefined
 );
 
-
-
-async function sendIceCream(iceCream: IceCream): Promise<any> {
-  try {
-    const response = await axios.post(
-      "http://localhost:5000/api/records",
-      iceCream,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    console.log(response.data);
-    return response.data;
-  } catch (error) {
-    console.error("Error sending ice cream:", error);
-    throw error;
-  }
-}
-
-
 // Provider component
 export const IceCreamProvider = ({ children }: { children: ReactNode }) => {
   const [iceCreamList, setList] = useState<IceCream[]>([]);
 
+  async function sendIceCream(iceCream: IceCream): Promise<any> {
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/records",
+        iceCream,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(response.data);
+      fetchIceCreams();
+      return response.data;
+    } catch (error) {
+      console.error("Error sending ice cream:", error);
+      throw error;
+    }
+  }
 
-
-
-  useEffect(() => {
-    axios
+  async function fetchIceCreams() {
+   await axios
       .get<IceCream[]>("http://localhost:5000/api/records")
       .then((response) => {
         setList(response.data);
@@ -64,10 +52,14 @@ export const IceCreamProvider = ({ children }: { children: ReactNode }) => {
       .catch((error) => {
         console.error("Error fetching ice cream records:", error);
       });
-  }, []);
+  }
+
+  // useEffect(() => {
+  //   fetchIceCreams();
+  // }, []);
 
   return (
-    <IceCreamContext.Provider value={{ iceCreamList, setList, sendIceCream }}>
+    <IceCreamContext.Provider value={{ iceCreamList, sendIceCream, fetchIceCreams }}>
       {children}
     </IceCreamContext.Provider>
   );
