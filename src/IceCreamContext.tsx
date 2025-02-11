@@ -13,7 +13,9 @@ interface IceCreamContextType {
   iceCreamList: IceCream[];
   fetchIceCreams: any;
   sendIceCream: any;
-  fetchParticularIceCream:any
+  fetchParticularIceCream: any;
+  updateParticularIceCream:any;
+  deleteParticularIceCream:any;
 }
 
 const IceCreamContext = createContext<IceCreamContextType | undefined>(
@@ -45,7 +47,7 @@ export const IceCreamProvider = ({ children }: { children: ReactNode }) => {
   }
 
   async function fetchIceCreams() {
-   await axios
+    await axios
       .get<IceCream[]>("http://localhost:5000/api/records")
       .then((response) => {
         setList(response.data);
@@ -55,24 +57,70 @@ export const IceCreamProvider = ({ children }: { children: ReactNode }) => {
       });
   }
 
-
-  async function fetchParticularIceCream(id: number): Promise<IceCream | null> {
-      try {
-          const response = await axios.get<IceCream>(`http://localhost:5000/api/records/${id}`);
-          return response.data;
-      } catch (error) {
-          console.error("Error fetching ice cream:", error);
-          return null; 
-      }
+  async function fetchParticularIceCream(id: string): Promise<IceCream | null> {
+    try {
+      const response = await axios.get<IceCream>(
+        `http://localhost:5000/api/records/${id}`
+      );
+      return response.data;
+    } catch (error) {
+      // console.error("Error fetching ice cream:", error);
+      return null;
+    }
   }
-  
+
+  async function updateParticularIceCream(
+    iceCream: IceCream
+  ): Promise<IceCream> {
+    try {
+      const response = await axios.patch(
+        "http://localhost:5000/api/records/"+iceCream.id,
+        iceCream,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async function deleteParticularIceCream(id: string): Promise<any> {
+    try {
+      const response = await axios.delete(
+        "http://localhost:5000/api/records/" + id,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
 
   // useEffect(() => {
   //   fetchIceCreams();
   // }, []);
 
   return (
-    <IceCreamContext.Provider value={{ iceCreamList, sendIceCream, fetchIceCreams, fetchParticularIceCream }}>
+    <IceCreamContext.Provider
+      value={{
+        iceCreamList,
+        sendIceCream,
+        fetchIceCreams,
+        fetchParticularIceCream,
+        updateParticularIceCream,
+        deleteParticularIceCream
+      }}
+    >
       {children}
     </IceCreamContext.Provider>
   );

@@ -12,7 +12,7 @@ const NavBar = () => {
           to="/"
           end
           className={({ isActive }) =>
-            isActive ? "text-blue-500 font-bold" : "text-gray-400"
+            isActive ? "text-stone-100 font-bold" : "text-gray-400"
           }
         >
           Home
@@ -20,7 +20,7 @@ const NavBar = () => {
         <NavLink
           to="/about"
           className={({ isActive }) =>
-            isActive ? "text-blue-500 font-bold" : "text-gray-400"
+            isActive ? "text-stone-100 font-bold" : "text-gray-400"
           }
         >
           About
@@ -28,13 +28,13 @@ const NavBar = () => {
         <NavLink
           to="/contact"
           className={({ isActive }) =>
-            isActive ? "text-blue-500 font-bold" : "text-gray-400"
+            isActive ? "text-stone-100 font-bold" : "text-gray-400"
           }
         >
           Contact
         </NavLink>
         <NavLink to="/search" className={({ isActive }) =>
-            isActive ? "text-blue-500 font-bold" : "text-gray-400"
+            isActive ? "text-stone-100 font-bold" : "text-gray-400"
           }>
           Search
         </NavLink>

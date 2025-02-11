@@ -29,16 +29,15 @@ function App() {
     <BrowserRouter>
       <div className="bg-stone-500 h-screen px-5 md:px-0 overflow-scroll">
         <NavBar />
-        <Routes>
-          <IceCreamProvider>
+        <IceCreamProvider>
+          <Routes>
             <Route path="/" element={<Menu />} />
             <Route path="/ice-cream/:id" element={<ParticularIceCream />} />
-          </IceCreamProvider>
-          <Route path="/about" element={<About />} />
-          <Route path="/search" element={<SearchIceCreams />} />
-
-          {/* <Route path="/contact" element={<Contact />} /> */}
-        </Routes>
+            <Route path="/about" element={<About />} />
+            <Route path="/search" element={<SearchIceCreams />} />
+            {/* <Route path="/contact" element={<Contact />} /> */}
+          </Routes>
+        </IceCreamProvider>
       </div>
     </BrowserRouter>
   );

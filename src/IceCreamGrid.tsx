@@ -30,19 +30,19 @@ const IceCreamGrid: React.FC = () => {
       </div> */}
       <div className="grid grid-cols-1 px-[15%] sm:grid-cols-2 md:grid-cols-3 gap-4">
         {isLoading
-          ? [...Array(9)].map((_) => <IceCreamHolderShimmer />)
+          ? [...Array(9)].map((_,index) => <IceCreamHolderShimmer key={index}/>)
           : iceCreamList.map((iceCream) => (
-              <Link to={`/ice-cream/${iceCream.id}`}>
+              <Link to={`/ice-cream/${iceCream.id}`} key={iceCream.id}>
                 <IceCreamHolder
                   id={iceCream.id}
                   image={`https://picsum.photos/id/${Math.floor(
-                    400 * Math.random()
+                    200 * Math.random()
                   )}/200/300?grayscale&blur=4`}
                   name={iceCream.name}
                   price={iceCream.price}
                   stock={iceCream.stock}
                   about={iceCream.about}
-                />
+                 />
               </Link>
             ))}
       </div>
