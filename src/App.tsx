@@ -21,7 +21,6 @@ const pageTitleUpdater = () => {
   useEffect(() => {
     document.title = pageTitles[location.pathname];
   }, [location]);
-
   return null;
 };
 
@@ -31,17 +30,13 @@ function App() {
       <div className="bg-stone-500 h-screen px-5 md:px-0 overflow-scroll">
         <NavBar />
         <Routes>
-          <Route
-            path="/"
-            element={
-              <IceCreamProvider>
-                <Menu />
-              </IceCreamProvider>
-            }
-          />
+          <IceCreamProvider>
+            <Route path="/" element={<Menu />} />
+            <Route path="/ice-cream/:id" element={<ParticularIceCream />} />
+          </IceCreamProvider>
           <Route path="/about" element={<About />} />
           <Route path="/search" element={<SearchIceCreams />} />
-          <Route path="/ice-cream/:id" element={<ParticularIceCream />} />
+
           {/* <Route path="/contact" element={<Contact />} /> */}
         </Routes>
       </div>

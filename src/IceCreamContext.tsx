@@ -13,6 +13,7 @@ interface IceCreamContextType {
   iceCreamList: IceCream[];
   fetchIceCreams: any;
   sendIceCream: any;
+  fetchParticularIceCream:any
 }
 
 const IceCreamContext = createContext<IceCreamContextType | undefined>(
@@ -54,12 +55,24 @@ export const IceCreamProvider = ({ children }: { children: ReactNode }) => {
       });
   }
 
+
+  async function fetchParticularIceCream(id: number): Promise<IceCream | null> {
+      try {
+          const response = await axios.get<IceCream>(`http://localhost:5000/api/records/${id}`);
+          return response.data;
+      } catch (error) {
+          console.error("Error fetching ice cream:", error);
+          return null; 
+      }
+  }
+  
+
   // useEffect(() => {
   //   fetchIceCreams();
   // }, []);
 
   return (
-    <IceCreamContext.Provider value={{ iceCreamList, sendIceCream, fetchIceCreams }}>
+    <IceCreamContext.Provider value={{ iceCreamList, sendIceCream, fetchIceCreams, fetchParticularIceCream }}>
       {children}
     </IceCreamContext.Provider>
   );
